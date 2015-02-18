@@ -6,7 +6,6 @@
 
 
 #include <htc.h>
-#include <stdio.h>
 
 
 typedef signed char int8_t;
