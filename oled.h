@@ -232,18 +232,15 @@ for(uint8_t i=0; i<sizeof init; i++) oled_cmd(init[i]); //send the init commands
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void oled_write(uint8_t mode, uint8_t data) //mode: 1-data, 0-command  //data: data byte
 {
-uint8_t s=0x80;
-
 CS_L; //chip select in the active state
 
 if(mode) DC_H; //data mode
 else DC_L; //command
 
-for(uint8_t i=0; i<8; i++) //send byte
+for(uint8_t s=0x80; s>0; s>>=1) //send byte
 	{
 	if(data & s) DAT_H;
 	else DAT_L;
-	s = s>>1;
 	SCK_H; //on rising edge of SCLK
 	SCK_L;
 	}
